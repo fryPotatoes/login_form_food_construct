@@ -1,14 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use \App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,20 +29,29 @@ Route::middleware('auth')
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
+    });
+//Guest routes
 
-Route::middleware('auth')
+Route::middleware('guest')
     ->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('/home ', [AdminUserController::class, 'home'])->name('guest.home');
+Route::get('/about', [AdminUserController::class, 'about'])->name('guest.about');
+Route::get('/contact', [AdminUserController::class, 'contact'])->name('guest.contact');
+    });
 
 
-//marx
+
+//Test route
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
+
+
+//Andrey
+Route::get('/recipes', [RecipeController::class, 'index'])->middleware(['auth', 'verified'])->name('recipes');
+
+
 
 require __DIR__.'/auth.php';
-
 
 

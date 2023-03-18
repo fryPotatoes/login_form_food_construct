@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -17,9 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $user = User::latest()->get();
 
-        return Inertia::render('Post/Index', ['posts' => $posts]);
+        return Inertia::render('Post/Test', ['user' => $user]);
     }
 
     /**

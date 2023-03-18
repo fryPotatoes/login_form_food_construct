@@ -28,6 +28,7 @@ Route::middleware('guest')
     });
 
 Route::middleware('auth')
+//    ->name('mark.')
     ->group(function () {
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
 
