@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
+import DangerButton from '@/Components/mark/DangerButton';
+import InputError from '@/Components/mark/InputError';
+import InputLabel from '@/Components/mark/InputLabel';
+import Modal from '@/Components/mark/Modal';
+import SecondaryButton from '@/Components/mark/SecondaryButton';
+import TextInput from '@/Components/mark/TextInput';
 import { useForm } from '@inertiajs/react';
 
 export default function DeleteUserForm({ className }) {
@@ -49,8 +49,7 @@ export default function DeleteUserForm({ className }) {
                 <h2 className="text-lg font-medium text-gray-900">Удалить Аккаунт</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Как только ваша учетная запись будет удалена, все ее ресурсы и данные будут удалены безвозвратно. Перед
-                    удалением вашей учетной записи, пожалуйста, загрузите любые данные или информацию, которые вы хотите сохранить.
+                    Как только ваша учетная запись будет удалена, все ее ресурсы и данные будут удалены безвозвратно.
                 </p>
             </header>
 
@@ -63,7 +62,7 @@ export default function DeleteUserForm({ className }) {
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600">
-                        Как только ваша учетная запись будет удалена, все ее ресурсы и данные будут удалены безвозвратно. Пожалуйста
+                      Пожалуйста
                         введите свой пароль, чтобы подтвердить, что вы хотите окончательно удалить свою учетную запись.
                     </p>
 

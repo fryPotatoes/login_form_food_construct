@@ -1,0 +1,139 @@
+<?php
+//
+//namespace App\Http\Controllers;
+//
+//use App\Models\User;
+//use Illuminate\Http\Request;
+//use Inertia\Inertia;
+//
+//class RecipeController extends Controller
+//{
+//   public function index(){
+//
+//       return Inertia::render('Recipes');
+//   }
+//}
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Recipe;
+use App\QueryBuilders\CategoryQueryBuilder;
+use App\QueryBuilders\IngredientsQueryBuilder;
+use App\QueryBuilders\RecipesQueryBuilder;
+use App\QueryBuilders\RecipesStepsQueryBuilder;
+use Illuminate\Support\Arr;
+use Inertia\Inertia;
+//use App\QueryBuilders\RecipesQueryBuilder;
+use Inertia\Response;
+
+
+
+class RecipeController extends Controller
+{
+    /**
+     * @return Response
+     */
+    public function index(
+        //RecipesQueryBuilder $recipesQueryBuilder,
+//        CategoryQueryBuilder $categoryQueryBuilder
+    )
+    {
+       // $recipeList = $recipesQueryBuilder->getAll();
+        $recipeList = Recipe::query()->get();
+//        dd($recipeList);
+
+//   $categories = Recipe::query()->join('categories', 'category_id', '=', 'categories.id')
+//       ->WHERE('category_id', '=','categories.id')
+//       ->select(['category_id', 'categories.id'])
+//       ->paginate();
+
+        $recipes = [];
+        foreach ($recipeList as $key => $recipe) {
+            $recipes[] = [
+                'id' => $recipe->id,
+                'category_id' => $recipe->category_id,
+                'title' => $recipe->title,
+                'calorie' => $recipe->calorie,
+                'proteins' => $recipe->proteins,
+                'fats' => $recipe->fats,
+                'carbohydrates' => $recipe->carbohydrates,
+                'cooking_time' => $recipe->cooking_time,
+                'category_title' => $recipe->category->title
+            ];
+
+        }
+        return Inertia::render('Recipes', [
+            'recipes' => $recipes,
+
+        ]);
+    }
+
+    public function show(
+        RecipesQueryBuilder $recipesQueryBuilder,
+        RecipesStepsQueryBuilder $recipesStepsQueryBuilder,
+        int $id)
+    {
+        $data = $recipesQueryBuilder->getRecipeById($id);
+
+        //Шаги по приготовлению рецепта
+        $recipeStepsBuilder = $recipesStepsQueryBuilder->getRecipeStepById($id);
+        $recipeStepsList = [];
+        $recipeOne = [];
+
+        foreach ($recipeStepsBuilder as $key => $value) {
+            $recipeStepsList[] = [
+                'step_number' => $value->step_number,
+                'description' => $value->description,
+            ];
+        }
+
+        //Данные для одного рецепта
+        foreach ($data as $key => $value) {
+            $recipeOne[] = [
+                'id' => $value->id,
+                'category_id' => $value->category_id,
+                'title' => $value->title,
+                'calorie' => $value->calorie,
+                'proteins' => $value->proteins,
+                'fats' => $value->fats,
+                'carbohydrates' => $value->carbohydrates,
+                'portion' => $value->portion,
+                'cooking_time' => $value->cooking_time,
+                'category_title' => $value->category->title,
+                'steps' => $recipeStepsList,
+                'count_steps' => last($recipeStepsList)["step_number"],
+                'ingredients' => $value->ingredients,
+            ];
+
+
+        }
+        //Рекомендации на страницу рецепт по номеру категории
+        $advices_category_id = $data->value('category_id');
+        $recipeAdvicesList = $recipesQueryBuilder
+            ->getRecipeByCategoryId($advices_category_id)
+            ->random(2);
+
+        $recipeOneAdvice =[];
+        foreach ($recipeAdvicesList as $key => $value) {
+            $recipeOneAdvice[] = [
+                'id' => $value->id,
+                'category_id' => $value->category_id,
+                'title' => $value->title,
+                'calorie' => $value->calorie,
+                'proteins' => $value->proteins,
+                'fats' => $value->fats,
+                'carbohydrates' => $value->carbohydrates,
+                'portion' => $value->portion,
+                'cooking_time' => $value->cooking_time,
+                'category_title' => $value->category->title,
+            ];
+        }
+
+
+        return Inertia::render('Recipe', [
+            'recipeOne' => $recipeOne,
+            'recipeOneAdvice' => $recipeOneAdvice
+        ]);
+    }
+}
