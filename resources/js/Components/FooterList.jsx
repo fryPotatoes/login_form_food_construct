@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-    Link
-} from "react-router-dom";
-import '../../css/recipe.css';
+import { Link } from '@inertiajs/react';
+// import '../../css/recipe.css';
 
 import vk from "../../../public/assets/recipe_image/icons/icons-vk.png";
 import yt from "../../../public/assets/recipe_image/icons/icons-youtube.png";
@@ -10,17 +8,21 @@ import tg from "../../../public/assets/recipe_image/icons/icons-telegram.png";
 
 
 
-const FooterList = () => {
+export default function FooterList(props)  {
     return (
-        <div>
+
+
+
+
+        <div{...props}>
             <div className="section section_footer">
                 <div className="container">
                     <div className="footer">
                         <ul className="footer_menu">
 
-                            <li className="footer_menu_item"><Link className="footer_menu_color" to="/">Главная</Link></li>
-                            <li className="footer_menu_item"><Link className="footer_menu_color" to="/builder">Конструктор меню</Link></li>
-                            <li className="footer_menu_item"><Link className="footer_menu_color" to="/recipes">Рецепты</Link></li>
+                            <li className="footer_menu_item"><Link className="footer_menu_color" href="/">Главная</Link></li>
+                            <li className="footer_menu_item"><Link className="footer_menu_color" href="/posts">Конструктор меню</Link></li>
+                            <li className="footer_menu_item"><Link className="footer_menu_color" href="/recipes">Рецепты</Link></li>
                         </ul>
 
                         <div className="footer_contacts">
@@ -37,4 +39,4 @@ const FooterList = () => {
     )
 };
 
-export default FooterList;
+

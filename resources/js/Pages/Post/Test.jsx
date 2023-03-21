@@ -1,4 +1,4 @@
-// import Layout from './../../Layouts/AuthenticatedLayout'
+
 // import Authenticated from "./../../Layouts/AuthenticatedLayout";
 // import { usePage } from '@inertiajs/react'
 // const Test = ({ user }) => {
@@ -18,23 +18,29 @@
 
 
 import { usePage } from '@inertiajs/react'
-import GuestLayout from '@/Layouts/GuestLayout'
 
+import GuestLayout from '@/Layouts/GuestLayout'
+ import Layout from './../../Layouts/Layout'
+import FooterList from "@/Components/FooterList";
 export default function Test({ children  }) {
     const { auth } = usePage().props
 
     return (
-     <GuestLayout>
-        <main>
-            <header>
-                You are logged in as: {auth.user.name}
-            </header>
-            <content>
-                {children}
-            </content>
-        </main>
-     </GuestLayout>
+     <Layout>
 
+
+                You are logged in as: {auth.user.name}
+
+            <main>
+
+                {children}
+
+            </main>
+
+         <footer className="flex justify-between h-16" >
+             <FooterList></FooterList>
+         </footer>
+     </Layout>
 
     )
 }

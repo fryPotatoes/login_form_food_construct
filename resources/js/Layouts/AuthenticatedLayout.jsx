@@ -6,14 +6,20 @@ import NavLink from '@/Components/mark/NavLink';
 import ResponsiveNavLink from '@/Components/mark/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
-export default function Authenticated({ auth, header, children }) {
+
+
+
+export default function Authenticated({ auth, header, children, footer}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
                     <div className="flex justify-between h-16">
+
                         <div className="flex">
 
                             <div className="shrink-0 flex items-center">
@@ -31,8 +37,16 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('recipes')} active={route().current('recipes')}>
                                   Recipes
                                 </NavLink>
+
+                                <NavLink href={route('form.index')} active={route().current('form.index')}>
+                                   Form
+                                </NavLink>
+
                                 <NavLink href={route('posts.index')} active={route().current('posts.index')}>
                                  Test
+                                </NavLink>
+                                <NavLink href={route('advice')} active={route().current('advice')}>
+                                    Advice
                                 </NavLink>
 
                             </div>
@@ -64,7 +78,7 @@ export default function Authenticated({ auth, header, children }) {
 
 
 
-                        <div className="-mr-2 flex items-center sm:hidden">
+                        <div className="mr-2 flex items-center sm:hidden">
                             <button onClick={() => setShowingNavigationDropdown((previousState) => !previousState)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -86,6 +100,10 @@ export default function Authenticated({ auth, header, children }) {
                         </div>
 
                     </div>
+
+
+
+
                 </div>
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
@@ -96,6 +114,10 @@ export default function Authenticated({ auth, header, children }) {
 
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Recipes
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                            test
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -135,6 +157,11 @@ export default function Authenticated({ auth, header, children }) {
             )}
 
             <main>{children}</main>
+            <footer>{footer}</footer>
+
+
+
+
         </div>
     );
 }

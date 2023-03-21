@@ -16,12 +16,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Recipe;
+use App\QueryBuilders\CategoryQueryBuilder;
 use App\QueryBuilders\IngredientsQueryBuilder;
+use App\QueryBuilders\RecipesQueryBuilder;
 use App\QueryBuilders\RecipesStepsQueryBuilder;
 use Illuminate\Support\Arr;
 use Inertia\Inertia;
-use App\QueryBuilders\RecipesQueryBuilder;
+//use App\QueryBuilders\RecipesQueryBuilder;
 use Inertia\Response;
+
 
 
 class RecipeController extends Controller
@@ -29,9 +34,19 @@ class RecipeController extends Controller
     /**
      * @return Response
      */
-    public function index(RecipesQueryBuilder $recipesQueryBuilder)
+    public function index(
+        //RecipesQueryBuilder $recipesQueryBuilder,
+//        CategoryQueryBuilder $categoryQueryBuilder
+    )
     {
-        $recipeList = $recipesQueryBuilder->getAll();
+       // $recipeList = $recipesQueryBuilder->getAll();
+        $recipeList = Recipe::query()->get();
+//        dd($recipeList);
+
+//   $categories = Recipe::query()->join('categories', 'category_id', '=', 'categories.id')
+//       ->WHERE('category_id', '=','categories.id')
+//       ->select(['category_id', 'categories.id'])
+//       ->paginate();
 
         $recipes = [];
         foreach ($recipeList as $key => $recipe) {
@@ -49,7 +64,8 @@ class RecipeController extends Controller
 
         }
         return Inertia::render('Recipes', [
-            'recipes' => $recipes
+            'recipes' => $recipes,
+
         ]);
     }
 
