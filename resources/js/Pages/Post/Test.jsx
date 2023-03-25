@@ -37,9 +37,9 @@ export default function Test({ children  }) {
 
             </main>
 
-         <footer className="flex justify-between h-16" >
+
              <FooterList></FooterList>
-         </footer>
+
      </Layout>
 
     )

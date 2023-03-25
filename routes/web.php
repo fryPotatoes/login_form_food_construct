@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdviceController;
-use App\Http\Controllers\Api\UserController;
+use \App\Http\Controllers\MainController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MenuController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\GuestLyoutController as AdminUserController;
 use \App\Http\Controllers\CategoryController;
+use \App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,11 +25,8 @@ use \App\Http\Controllers\CategoryController;
 |
 */
 //
-
-
-Route::get('/', [\App\Http\Controllers\MainController::class, 'index'])->name('Main')->middleware('guest');
-
 Route::get('/dashboard',DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+
 
 //Auth routes
 Route::middleware('auth')
@@ -36,14 +34,16 @@ Route::middleware('auth')
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::get('account', [AccountController::class, 'index']);
     });
 //Guest routes
 Route::middleware('guest')
     ->group(function () {
-Route::get('/home ', [AdminUserController::class, 'home'])->name('guest.home');
+        Route::get('/home',[HomeController::class,'index'])->name('Home');
+//Route::get('/home ', [AdminUserController::class, 'home'])->name('guest.home');
 Route::get('/about', [AdminUserController::class, 'about'])->name('guest.about');
 Route::get('/contact', [AdminUserController::class, 'contact'])->name('guest.contact');
+        Route::get('/', [MainController::class, 'index'])->name('Main');
     });
 
 
@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/advice', [AdviceController::class, 'index'])->name('advice');
     Route::get('/menu/builder', [MenuController::class, 'index']);
     Route::resource('form', FormController::class);
+    Route::get('account/{id}', [AccountController::class, 'index']);
 });
 
 
@@ -73,39 +74,22 @@ Route::get('/parser/recipes', RecipeParserController::class)->name('parser.recip
 
 
 
-//Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-// Route::get('/', [HomeController::class])->name('home');
-
-Route::get('account', [AccountController::class, 'index']);
 
 
 
 
 //Route::get('PersonalAccount', [UserController::class, 'show']);
 
-//Route::get('/api/Recipes', [RecipeController::class, 'index']);
-//Route::get('/api/recipe', [RecipeController::class, 'show']);
-
 
 // Route::any('{url}', function(){
 //     return view('app');
 // })->where('url', '.*');
-
-//Route::get('/Recipes', [RecipeController::class, 'index']);
-//Route::get('/recipe/{id}', [RecipeController::class, 'show']);
-
-
-
-
-
 
 
 // Route::get('/builder', function () {
 //     return view('app');
 // });
 
-// //Роуты для формы
-// Route::get('/api/form', [FormController::class, 'index']);
 
 
 

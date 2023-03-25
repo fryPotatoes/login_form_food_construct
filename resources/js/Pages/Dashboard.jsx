@@ -37,7 +37,7 @@ export default function Dashboard(props) {
 </div>
             </main>
             <footer className="font-semibold text-xl text-gray-500 leading-tight" >
-                <FooterList></FooterList>
+
             </footer>
 
         </AuthenticatedLayout>

@@ -10,8 +10,8 @@ export default function Guest({ header, children,footer }) {
                 <Link href="/">
                     <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                 </Link>
-                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <Link href="/home" className="w-20 h-20 fill-current text-red-400 " >"Домашняя страница"</Link>
+                <div className=" space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <Link href="/home" className="w-20 h-20 fill-current text-red-400 " >"Home"</Link>
                     <Link href="/about" className="w-20 h-20 fill-current text-yellow-500  ">"О нас"</Link>
                     <Link href="/contact" className="w-20 h-20 fill-current text-green-500  ">"Контакты"</Link>
                 </div>
@@ -33,9 +33,11 @@ export default function Guest({ header, children,footer }) {
                 <footer className="bg-grey-100 shadow">
                     <div className="mr-2 flex items-center sm:hidden max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{footer}</div>
                 </footer> && <footer className="flex justify-between h-16" >
-                    <FooterList ></FooterList>
+                    <FooterList></FooterList>
                 </footer>
             )}
+
+
 
 
 

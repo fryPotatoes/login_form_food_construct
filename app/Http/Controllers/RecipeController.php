@@ -66,14 +66,17 @@ class RecipeController extends Controller
         return Inertia::render('Recipes', [
             'recipes' => $recipes,
 
-        ]);
+        ]) ;
     }
+
 
     public function show(
         RecipesQueryBuilder $recipesQueryBuilder,
         RecipesStepsQueryBuilder $recipesStepsQueryBuilder,
         int $id)
     {
+
+
         $data = $recipesQueryBuilder->getRecipeById($id);
 
         //Шаги по приготовлению рецепта
@@ -130,10 +133,19 @@ class RecipeController extends Controller
             ];
         }
 
-
+        if ($recipeAdvicesList){
         return Inertia::render('Recipe', [
             'recipeOne' => $recipeOne,
             'recipeOneAdvice' => $recipeOneAdvice
-        ]);
+        ])->with('sucsess');
+    }else
+
+    return redirect()->route('dashboard');
     }
 }
+
+
+
+
+
+    //   return view('santa.happysanta',['santa'=> $santa, 'country'=> $country,'happysanta'=> $happysanta,'user'=> $user])->with('success', 'Санта успешно создан!');

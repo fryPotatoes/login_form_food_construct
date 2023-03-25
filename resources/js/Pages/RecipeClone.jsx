@@ -1,3 +1,4 @@
+
 import React from 'react';
 import '../../css/recipe.css';
 import {
@@ -34,13 +35,13 @@ const Recipe = (props) => {
         const quant = quantArr.length ? quantArr[0] : null
 
         return (<div>
-            <div className="reccard_kbzhu1">
-                <div className="reccard_kbzhu_name">{i.title}, {i.mass_unit}</div>
-                <div className="reccard_kbzhu_dotted"></div>
-                <div className="reccard_kbzhu_values reccard_ingr_values" data-ingr-value="250">
-                    {quant.quantity}</div>
+                <div className="reccard_kbzhu1">
+                    <div className="reccard_kbzhu_name">{i.title}, {i.mass_unit}</div>
+                    <div className="reccard_kbzhu_dotted"></div>
+                    <div className="reccard_kbzhu_values reccard_ingr_values" data-ingr-value="250">
+                        {quant.quantity}</div>
+                </div>
             </div>
-        </div>
         )
 
     })

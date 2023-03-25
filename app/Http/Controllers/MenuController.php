@@ -10,7 +10,12 @@ class MenuController extends Controller
 {
     public function index()
     {
-        return Inertia::render('MenuBuilder');
+        $menu = [];
+
+
+        return Inertia::render('MenuBuilder', [
+            'menu' => $menu,
+        ]);
     }
 
 }
