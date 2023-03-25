@@ -16,7 +16,7 @@ class AccountController extends Controller
         $id = Auth::id();
 
         $user = ProfileUser::query()->where('user_id',$id)->get();
-//            dump($user);
+            dump($user);
 
         return Inertia::render('PersonalAccount')->with('user',$user);
     }
